@@ -149,10 +149,10 @@ export default function GardenDetails({match}) {
                         </Form.Group>
                         <Form.Group controlId='image' style={{margin: 10}}>
                             <Form.Label>Image</Form.Label>
-                            <Form.Control
+                            {/* <Form.Control
                 
                 
-              ></Form.Control>
+              ></Form.Control> */}
                             <Form.File accept=".jpg, .png" label={garden.image || "Upload Image"}
                                        onChange={(e) => {
                                            // setGarden({...garden, image: e.target.value})
