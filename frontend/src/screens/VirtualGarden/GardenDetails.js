@@ -153,7 +153,7 @@ export default function GardenDetails({match}) {
                 
                 
               ></Form.Control> */}
-                            <Form.File accept=".jpg, .png" label={garden.image || "Upload Image"}
+                            <Form.File accept=".jpg, .png, .jpeg" label={garden.image || "Upload Image"}
                                        onChange={(e) => {
                                            // setGarden({...garden, image: e.target.value})
                                            setGardenImageFile(e.target.files[0])
