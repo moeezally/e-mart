@@ -1,0 +1,5 @@
+export const FORUM_CREATE = 'FORUM_CREATE'
+export const FORUM_GET_ONE = 'FORUM_GET_ONE'
+export const FORUM_GET_ALL = 'FORUM_GET_ALL'
+export const FORUM_ADD_REPLY = 'FORUM_ADD_REPLY'
+export const FORUM_TOGGLE_LIKE = 'FORUM_TOGGLE_LIKE'
