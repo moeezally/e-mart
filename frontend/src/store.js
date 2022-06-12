@@ -10,6 +10,7 @@ import {
     productReviewCreateReducer,
     productTopRatedReducer,
     productCategoryListReducer,
+
 } from './reducers/productReducers'
 import {
     blogListReducer,
@@ -27,7 +28,8 @@ import {
     rentingDeleteReducer,
     rentingReviewCreateReducer,
     rentingUpdateReducer,
-    rentingTopRatedReducer
+    rentingTopRatedReducer,
+   rentingLikeReducer,rentingReplyReducer,rentingQuestionReducer
 
 } from './reducers/rentingReducers'
 import {cartReducer} from './reducers/cartReducers'
@@ -77,6 +79,9 @@ const reducer = combineReducers({
     rentingUpdate: rentingUpdateReducer,
     rentingReviewCreate: rentingReviewCreateReducer,
     rentingTopRated: rentingTopRatedReducer,
+    rentingAddReply: rentingReplyReducer,
+    rentingLike: rentingLikeReducer,
+    rentingQuestion:rentingQuestionReducer,
     blogList: blogListReducer,
     blogDetails: blogDetailsReducer,
     blogDelete: blogDeleteReducer,

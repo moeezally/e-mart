@@ -21,8 +21,14 @@ const getRentings = asyncHandler(async (req, res) => {
   const rentings = await Renting.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1))
+    .populate('user', '_id name');
+    const data = rentings.map((renting) => {
+      return {
+          ...renting._doc, 'replies': [], 'replies_count': renting['replies'].length
+      }
+  })
 
-  res.json({ rentings, page, pages: Math.ceil(count / pageSize) })
+  res.json({ rentings:data, page, pages: Math.ceil(count / pageSize) })
 })
 
 // @desc    Fetch single product
@@ -32,6 +38,27 @@ const getRentingById = asyncHandler(async (req, res) => {
   const renting = await Renting.findById(req.params.id)
 
   if (renting) {
+    const {
+      user
+  } = req.body;
+
+  let renting = await Renting.findById(req.params.id)
+      .populate('user', '_id name')
+      .populate('replies.user', '_id name');
+
+  let data = {...renting._doc}
+
+  data.replies = data.replies.map((r) => {
+      let reply = {...r._doc};
+      if (user) {
+          let is_liked = reply.likes.filter((like) => like.user == user);
+          reply['liked_by_me'] = is_liked.length > 0;
+      }
+      reply['total_likes'] = reply.likes.length;
+      delete reply['likes'];
+      return reply;
+  })
+
     res.json(renting)
   } else {
     res.status(404)
@@ -160,6 +187,37 @@ const getTopRentings = asyncHandler(async (req, res) => {
   res.json(rentings)
 })
 
+
+ const addReply = asyncHandler(async (req, res) => {
+  const {text} = req.body;
+
+  const updated = await Forum.findByIdAndUpdate(req.params.id, {
+      $push: {
+          'replies': {
+              user: req.user._id, text
+          }
+      }
+  }, {new: true},);
+
+  res.json(updated);
+});
+
+ const addLike = asyncHandler(async (req, res) => {
+
+  let renting = await Renting.findById(req.params.id);
+  let reply = renting._doc.replies.find((reply) => reply._id == req.params.rid);
+  let liked = reply.likes.find(like => String(like.user) == req.user._id);
+
+  let update_data = liked ? {$pull: {'replies.$.likes': {user: req.user._id}}} : {$push: {'replies.$.likes': {user: req.user._id}}}
+
+  const updated = await Forum.findOneAndUpdate({
+      _id: req.params.id, 'replies._id': req.params.rid
+  }, update_data, {new: true})
+
+  res.json(updated);
+});
+
+
 export {
   getRentings,
   getRentingById,
@@ -168,4 +226,5 @@ export {
   updateRenting,
   createRentingReview,
   getTopRentings,
+addLike,addReply
 }

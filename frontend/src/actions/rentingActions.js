@@ -21,6 +21,9 @@ import {
   RENTING_TOP_REQUEST,
   RENTING_TOP_SUCCESS,
   RENTING_TOP_FAIL,
+  RENTING_ADD_REPLY,
+  RENTING_TOGGLE_LIKE,
+  ASK_QUESTION
 } from '../constants/rentingConstants'
 import { logout } from './userActions'
 
@@ -246,3 +249,66 @@ export const listTopRentings = () => async (dispatch) => {
     })
   }
 }
+
+
+export const addReply = (id, text) => async (dispatch, getState) => {
+
+  const {
+      userLogin: {userInfo},
+  } = getState()
+
+  const config = {
+      headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+      },
+  }
+
+  const {data} = await axios.post(`/api/rentings/${id}/reply`, {text}, config);
+
+  dispatch({
+      type: RENTING_ADD_REPLY, payload: data
+  })
+}
+
+export const toggleLike = (id, rid) => async (dispatch, getState) => {
+
+  const {
+      userLogin: {userInfo},
+  } = getState()
+
+  const config = {
+      headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+      },
+  }
+
+  const {data} = await axios.post(`/api/rentings/${id}/reply/${rid}/like`, {}, config);
+
+  dispatch({
+      type: RENTING_TOGGLE_LIKE, payload: data
+  })
+}
+
+
+export const askQuestion = ({title, description}) => async (dispatch, getState) => {
+
+  const {
+      userLogin: {userInfo},
+  } = getState()
+
+  const config = {
+      headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+      },
+  }
+
+  const {data} = await axios.post('/api/rentings', {
+      title, description
+  }, config);
+
+  dispatch({
+      type: ASK_QUESTION, payload: data,
+  })
+}
+
+

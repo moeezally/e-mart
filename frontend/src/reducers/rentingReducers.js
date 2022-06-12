@@ -23,6 +23,9 @@ import {
     RENTING_CREATE_REVIEW_RESET,
     RENTING_UPDATE_RESET,
     RENTING_CREATE_RESET,
+    RENTING_ADD_REPLY,
+    RENTING_TOGGLE_LIKE,
+    ASK_QUESTION
 
   
   } from '../constants/rentingConstants'
@@ -132,3 +135,30 @@ import {
     }
   }
   
+  
+export const rentingReplyReducer = (state = {}, action) => {
+  switch (action.type) {
+      case RENTING_ADD_REPLY:
+          return action.payload
+      default:
+          return state
+  }
+}
+
+export const rentingLikeReducer = (state = {}, action) => {
+  switch (action.type) {
+      case RENTING_TOGGLE_LIKE:
+          return action.payload
+      default:
+          return state
+  }
+}
+
+export const rentingQuestionReducer = (state = {}, action) => {
+  switch (action.type) {
+      case ASK_QUESTION:
+          return action.payload
+      default:
+          return state
+  }
+}
