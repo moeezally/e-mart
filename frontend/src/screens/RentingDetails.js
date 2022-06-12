@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {Row, Col, Image, ListGroup, Card, Button, Form, Modal, Pagination} from 'react-bootstrap'
+import {Row, Col, Image, ListGroup, Card, Button, Form} from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Meta from '../components/Meta'
-import { LinkContainer } from 'react-router-bootstrap'
 import {
-    listRentingDetails, createRentingReview,addReply,toggleLike,askQuestion
+    listRentingDetails, createRentingReview,addReply,toggleLike
 } from '../actions/rentingActions'
 import {RENTING_CREATE_REVIEW_REQUEST, RENTING_CREATE_REVIEW_RESET} from '../constants/rentingConstants'
 import {Carousel} from 'react-responsive-carousel'
@@ -43,7 +42,7 @@ const RentingDetails = ({history, match}) => {
     const dispatch = useDispatch()
 
     const rentingDetails = useSelector((state) => state.rentingDetails)
-    const {loading, error, renting,page,pages} = rentingDetails
+    const {loading, error, renting} = rentingDetails
 
     const replyReducer = useSelector((state) => state.rentingAddReply);
     const likeReducer = useSelector((state) => state.rentingLike);
@@ -61,13 +60,6 @@ const RentingDetails = ({history, match}) => {
     const {orders: myOrders} = userOrdersReducer;
 
     const [enableReview, setEnableReview] = useState(false);
-    
-    const [askTitle, setAskTitle] = useState('');
-    const [askQuestions, setAskQuestions] = useState('');
-    const [showCreateModal, setShowCreateModal] = useState(false);
-    const handleModalClose = () => setShowCreateModal(false);
-    const handleModalShow = () => setShowCreateModal(true);
-
 
     
     useEffect(() => {
@@ -114,12 +106,6 @@ const RentingDetails = ({history, match}) => {
 
     function handleToggleLike(rid) {
         dispatch(toggleLike(match.params.id, rid));
-    }
-    function handleSubmit(e) {
-        // post new question
-        dispatch(askQuestion({title: askTitle, description: askQuestions}));
-        handleModalClose();
-        e.preventDefault();
     }
 
 
@@ -287,58 +273,7 @@ const RentingDetails = ({history, match}) => {
                 </Col>
             </Row>
 
-            <h2>Question</h2>
-        {renting._id && <div>
-            <div className="card mb-2 rounded">
-                <div className="card-header">
-                    {renting.user.name}
-                </div>
-                <div className="card-body">
-                    <h2>{renting.title}</h2>
-                    <p>{renting.description}</p>
-                </div>
-            </div>
-
-            <Form className='pb-8' onSubmit={handleSubmit}>
-                <Card className="rounded">
-                    <Card.Body>
-                        <Form.Group style={{margin: 10}}>
-                            <Form.Label>Post your Reply</Form.Label>
-                            <Form.Control
-                                type='text'
-                                as='textarea'
-                                placeholder=''
-                                value={replyText}
-                                onChange={(e) => setReplyText(e.target.value)}
-                                required
-                            />
-                        </Form.Group>
-                    </Card.Body>
-                    <Card.Footer>
-                        <Button type='submit' style={{backgroundColor: '#1D4B2C'}}>Post</Button>
-                    </Card.Footer>
-                </Card>
-            </Form>
-
-            <h2 className='mt-5'>Replies</h2>
-
-            {renting.replies.map((reply) => (<Card className="rounded mb-4">
-                <Card.Header>
-                    {reply.user.name}
-                </Card.Header>
-                <Card.Body>
-                    <p>{reply.text}</p>
-                </Card.Body>
-                <Card.Footer>
-                    <div className='d-flex align-items-center'>
-                        <div onClick={() => handleToggleLike(reply._id)}>
-                            {reply.liked_by_me ? <FilledHeart/> : <EmptyHeart/>}
-                        </div>
-                        <p className='ml-2 pb-0 mb-0'>{reply.total_likes} likes</p>
-                    </div>
-                </Card.Footer>
-            </Card>))}
-        </div>}
+            
         </>)}
     </>)
 }
