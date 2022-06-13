@@ -16,6 +16,23 @@ const reviewSchema = mongoose.Schema(
   }
 )
 
+
+const replySchema = mongoose.Schema({
+  user: {
+      type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'
+  }, text: {
+      type: String, required: true
+  }, likes: [{
+      user: {
+          type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User', unique: true
+      }
+  }]
+}, {
+  timestamps: true,
+})
+
+
+
 const productSchema = mongoose.Schema(
   {
     user: {
@@ -69,6 +86,7 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    replies: [replySchema],
   },
   {
     timestamps: true,

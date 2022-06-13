@@ -28,8 +28,14 @@ const getProducts = asyncHandler(async (req, res) => {
     const products = await Product.find({...keyword})
         .limit(pageSize)
         .skip(pageSize * (page - 1))
+        .populate('user', '_id name');
+        const data =products.map((product) => {
+            return {
+                ...product._doc, 'replies': [], 'replies_count': product['replies'].length
+            }
+        })
 
-    res.json({products, page, pages: Math.ceil(count / pageSize)})
+    res.json({products:data, page, pages: Math.ceil(count / pageSize)})
 })
 
 // @desc    Fetch single product
@@ -39,6 +45,27 @@ const getProductById = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id)
 
     if (product) {
+        const {
+            user
+        } = req.body;
+      
+        let product = await Product.findById(req.params.id)
+            .populate('user', '_id name')
+            .populate('replies.user', '_id name');
+      
+        let data = {...product._doc}
+      
+        data.replies = data.replies.map((r) => {
+            let reply = {...r._doc};
+            if (user) {
+                let is_liked = reply.likes.filter((like) => like.user == user);
+                reply['liked_by_me'] = is_liked.length > 0;
+            }
+            reply['total_likes'] = reply.likes.length;
+            delete reply['likes'];
+            return reply;
+        })
+      
         res.json(product)
     } else {
         res.status(404)
@@ -167,6 +194,37 @@ const getTopProducts = asyncHandler(async (req, res) => {
     res.json(products)
 })
 
+
+const addReply = asyncHandler(async (req, res) => {
+    const {text} = req.body;
+  
+    const updated = await Forum.findByIdAndUpdate(req.params.id, {
+        $push: {
+            'replies': {
+                user: req.user._id, text
+            }
+        }
+    }, {new: true},);
+  
+    res.json(updated);
+  });
+  
+   const addLike = asyncHandler(async (req, res) => {
+  
+    let product = await Renting.findById(req.params.id);
+    let reply = product._doc.replies.find((reply) => reply._id == req.params.rid);
+    let liked = reply.likes.find(like => String(like.user) == req.user._id);
+  
+    let update_data = liked ? {$pull: {'replies.$.likes': {user: req.user._id}}} : {$push: {'replies.$.likes': {user: req.user._id}}}
+  
+    const updated = await Forum.findOneAndUpdate({
+        _id: req.params.id, 'replies._id': req.params.rid
+    }, update_data, {new: true})
+  
+    res.json(updated);
+  });
+  
+
 export {
     getProducts,
     getProductById,
@@ -175,4 +233,6 @@ export {
     updateProduct,
     createProductReview,
     getTopProducts,
+    addLike,
+    addReply
 }
