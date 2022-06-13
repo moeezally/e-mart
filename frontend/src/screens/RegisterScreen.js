@@ -87,8 +87,10 @@ const RegisterScreen = ({ location, history }) => {
           <Form.Control
             type='city'
             placeholder='Enter city'
-            value={city}
+            // value={city}
+            value='Lahore'
             maxLength='20'
+            disabled
             onChange={(e) => setCity(e.target.value.replace(/[^\w\s]/gi,""))}
           ></Form.Control>
         </Form.Group>

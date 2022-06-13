@@ -124,7 +124,9 @@ const ShippingEdit = ({ location, history }) => {
                 type='city'
                 placeholder='City'
                 maxLength='20'
-                value={city}
+                // value={city}
+                value='Lahore'
+                disabled
                 required
                 onChange={(e) => setCity(e.target.value.replace(/[^\w\s]/gi,""))}
               ></Form.Control>

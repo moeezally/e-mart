@@ -116,7 +116,9 @@ const EditProfile = ({ location, history }) => {
               <Form.Control
                 type='city'
                 placeholder='City'
-                value={city}
+                // value={city}
+                value='Lahore'
+                disabled
                 required
                 maxLength='20'
                 onChange={(e) => setCity(e.target.value.replace(/[^\w\s]/gi,""))}

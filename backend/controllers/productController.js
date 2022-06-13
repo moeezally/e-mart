@@ -12,7 +12,7 @@ const getProducts = asyncHandler(async (req, res) => {
         return res.json(products)
     }
 
-    const pageSize = 10
+    const pageSize = 12
     const page = Number(req.query.pageNumber) || 1
 
     const keyword = req.query.keyword
