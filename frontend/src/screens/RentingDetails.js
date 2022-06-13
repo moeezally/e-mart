@@ -12,6 +12,7 @@ import {
 import {RENTING_CREATE_REVIEW_REQUEST, RENTING_CREATE_REVIEW_RESET} from '../constants/rentingConstants'
 import {Carousel} from 'react-responsive-carousel'
 import {listMyOrders} from "../actions/orderActions";
+import Avatar from 'react-avatar';
 
 
 function EmptyHeart() {
@@ -226,6 +227,7 @@ const RentingDetails = ({history, match}) => {
                     <ListGroup variant='flush'>
                         {renting.reviews.map((review) => (<ListGroup.Item key={review._id}>
                             <strong>{review.name}</strong>
+                            <Avatar facebookId="100008343750912" size="50" round={true} style={{marginLeft:15,marginTop:-5}}/>
                             <Rating value={review.rating}/>
                             <p>{review.createdAt.substring(0, 10)}</p>
                             <p>{review.comment}</p>

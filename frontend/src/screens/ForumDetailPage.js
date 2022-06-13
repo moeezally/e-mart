@@ -3,6 +3,7 @@ import {Button, Card, Form} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {addReply, getForum, toggleLike} from '../actions/forumActions';
+import Avatar from 'react-avatar';
 
 function EmptyHeart() {
     return (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -53,7 +54,9 @@ export default function ForumDetailPage({match}) {
         {forum._id && <div>
             <div className="card mb-2 rounded">
                 <div className="card-header">
+                <Avatar facebookId="100008343750912" size="50" round={true} style={{marginRight:15,marginTop:-5}}/>
                     {forum.user.name}
+                    
                 </div>
                 <div className="card-body">
                     <h2>{forum.title}</h2>
@@ -86,7 +89,9 @@ export default function ForumDetailPage({match}) {
 
             {forum.replies.map((reply) => (<Card className="rounded mb-4">
                 <Card.Header>
+                <Avatar facebookId="100008343750912" size="50" round={true} style={{marginRight:15,marginTop:-5}}/>
                     {reply.user.name}
+                    
                 </Card.Header>
                 <Card.Body>
                     <p>{reply.text}</p>

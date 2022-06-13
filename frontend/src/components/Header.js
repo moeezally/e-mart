@@ -6,6 +6,7 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import SearchBox from './SearchBox'
 import { logout } from '../actions/userActions'
 import MovingText from 'react-moving-text'
+import Avatar from 'react-avatar';
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -114,6 +115,7 @@ const Header = () => {
                   <i className='fas fa-shopping-cart'>&nbsp;</i> Cart
                 </Nav.Link>
               </LinkContainer>
+              
 
 {userInfo ? (
                 <NavDropdown title={userInfo.name} id='username'>
@@ -127,7 +129,9 @@ const Header = () => {
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>
+                
               )
+              
                : 
               (
                 // <LinkContainer to='/login'>
@@ -137,7 +141,9 @@ const Header = () => {
                 // </LinkContainer>
                 <div></div>
               )
+              
               }
+              <Avatar facebookId="100008343750912" size="50" round={true} style={{marginLeft:-25,marginTop:-5}}/>
               
             </Nav>
           {/* </Navbar.Collapse> */}

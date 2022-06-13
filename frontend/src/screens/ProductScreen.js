@@ -10,6 +10,7 @@ import ImageGallery from 'react-image-gallery'
 import {Carousel} from 'react-responsive-carousel'
 import ReactDOM from 'react-dom'
 import {TransformWrapper, TransformComponent} from 'react-zoom-pan-pinch'
+import Avatar from 'react-avatar';
 
 import {
     listProductDetails, createProductReview,
@@ -192,7 +193,11 @@ const ProductScreen = ({history, match}) => {
 
                     <ListGroup variant='flush' >
                         {product.reviews.map((review) => (<ListGroup.Item key={review._id}>
+                            
                             <strong>{review.name}</strong>
+                            <Avatar facebookId="100008343750912" size="50" round={true} style={{marginLeft:15,marginTop:-5}}/>
+                           
+              
                             <Rating value={review.rating}/>
                             <p>{review.createdAt.substring(0, 10)}</p>
                             <p>{review.comment}</p>
