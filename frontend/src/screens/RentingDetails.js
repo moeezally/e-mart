@@ -259,6 +259,7 @@ const RentingDetails = ({history, match}) => {
                                             as='textarea'
                                             row='3'
                                             value={comment}
+                                            maxLength='250'
                                             onChange={(e) => setComment(e.target.value)}
                                         ></Form.Control>
                                     </Form.Group>
@@ -284,7 +285,7 @@ const RentingDetails = ({history, match}) => {
                     </ListGroup>
                 </Col>
             </Row>
-            
+{/*             
         <Modal show={showCreateModal} onHide={handleModalClose} centered>
             <Form onSubmit={handleSubmit}>
                 <Modal.Header closeButton>
@@ -353,11 +354,12 @@ const RentingDetails = ({history, match}) => {
                 </div>))}
 
             </div>
-            </div>
+            </div> */}
 
             
-        </>)}
-    </>)
+        </>
+        )}
+    </>)    
 }
 
 export default RentingDetails

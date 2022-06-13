@@ -99,7 +99,8 @@ const MyOrders = ({ location, history }) => {
                   <td>{order.totalPrice}</td>
                   <td>
                     {order.isPaid ? (
-                      order.paidAt.substring(0, 10)
+                      // order.paidAt.substring(0, 10)
+                      null
                     ) : (
                       <i className='fas fa-times' style={{ color: 'red' }}></i>
                     )}

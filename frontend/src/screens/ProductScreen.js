@@ -190,7 +190,7 @@ const ProductScreen = ({history, match}) => {
 
                     {product.reviews.length === 0 && <Message>No Reviews</Message>}
 
-                    <ListGroup variant='flush'>
+                    <ListGroup variant='flush' >
                         {product.reviews.map((review) => (<ListGroup.Item key={review._id}>
                             <strong>{review.name}</strong>
                             <Rating value={review.rating}/>
@@ -199,7 +199,7 @@ const ProductScreen = ({history, match}) => {
                         </ListGroup.Item>))}
                         <ListGroup.Item>
                             <h2>Write a Customer Review</h2>
-                            {successProductReview && (<Message variant='success'>
+                            {successProductReview &&  (<Message variant='success'>
                                 Review submitted successfully
                             </Message>)}
                             {loadingProductReview && <Loader/>}
@@ -226,6 +226,7 @@ const ProductScreen = ({history, match}) => {
                                             as='textarea'
                                             row='3'
                                             value={comment}
+                                            maxLength='250'
                                             onChange={(e) => setComment(e.target.value)}
                                         ></Form.Control>
                                     </Form.Group>
