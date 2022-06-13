@@ -21,6 +21,7 @@ import {
     PRODUCT_TOP_REQUEST,
     PRODUCT_TOP_SUCCESS,
     PRODUCT_TOP_FAIL, PRODUCT_CATEGORY_LIST_REQUEST, PRODUCT_CATEGORY_LIST_SUCCESS, PRODUCT_CATEGORY_LIST_FAIL,
+    PRODUCT_ADD_REPLY,PRODUCT_TOGGLE_LIKE,ASK_QUESTION
 } from '../constants/productConstants'
 import {logout} from './userActions'
 
@@ -271,3 +272,65 @@ export const listTopProducts = () => async (dispatch) => {
         })
     }
 }
+
+
+export const addReply = (id, text) => async (dispatch, getState) => {
+
+    const {
+        userLogin: {userInfo},
+    } = getState()
+  
+    const config = {
+        headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+        },
+    }
+  
+    const {data} = await axios.post(`/api/products/${id}/reply`, {text}, config);
+  
+    dispatch({
+        type: PRODUCT_ADD_REPLY, payload: data
+    })
+  }
+  
+  export const toggleLike = (id, rid) => async (dispatch, getState) => {
+  
+    const {
+        userLogin: {userInfo},
+    } = getState()
+  
+    const config = {
+        headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+        },
+    }
+  
+    const {data} = await axios.post(`/api/products/${id}/reply/${rid}/like`, {}, config);
+  
+    dispatch({
+        type: PRODUCT_TOGGLE_LIKE, payload: data
+    })
+  }
+  
+  
+  export const askQuestion = ({title, description}) => async (dispatch, getState) => {
+  
+    const {
+        userLogin: {userInfo},
+    } = getState()
+  
+    const config = {
+        headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+        },
+    }
+  
+    const {data} = await axios.post('/api/products', {
+        title, description
+    }, config);
+  
+    dispatch({
+        type: ASK_QUESTION, payload: data,
+    })
+  }
+  

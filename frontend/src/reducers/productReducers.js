@@ -23,6 +23,7 @@ import {
     PRODUCT_TOP_REQUEST,
     PRODUCT_TOP_SUCCESS,
     PRODUCT_TOP_FAIL, PRODUCT_CATEGORY_LIST_REQUEST, PRODUCT_CATEGORY_LIST_SUCCESS, PRODUCT_CATEGORY_LIST_FAIL,
+PRODUCT_ADD_REPLY,PRODUCT_TOGGLE_LIKE,ASK_QUESTION
 } from '../constants/productConstants'
 
 export const productListReducer = (state = {products: []}, action) => {
@@ -141,3 +142,33 @@ export const productTopRatedReducer = (state = {products: []}, action) => {
             return state
     }
 }
+
+
+
+  
+export const productReplyReducer = (state = {}, action) => {
+    switch (action.type) {
+        case PRODUCT_ADD_REPLY:
+            return action.payload
+        default:
+            return state
+    }
+  }
+  
+  export const productLikeReducer = (state = {}, action) => {
+    switch (action.type) {
+        case PRODUCT_TOGGLE_LIKE:
+            return action.payload
+        default:
+            return state
+    }
+  }
+  
+  export const productQuestionReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ASK_QUESTION:
+            return action.payload
+        default:
+            return state
+    }
+  }
