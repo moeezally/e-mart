@@ -13,8 +13,8 @@ jobs:
       - name: npm install & build
         working-directory: ./frontend
         run: |
-          CI=false npm install
-          npm run build 
+          npm install
+          CI=false npm run build 
 
       - name: Heroku login credentials
         run: |
