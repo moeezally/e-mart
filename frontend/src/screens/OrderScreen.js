@@ -102,7 +102,7 @@ const OrderScreen = ({ match, history }) => {
               <h2>Shipping</h2>
               <p>
                 <strong>Name: </strong> {order.user.name}
-                <Avatar facebookId="100008343750912" size="50" round={true} style={{marginLeft:20,marginTop:-5}}/>
+                {/* <Avatar facebookId="100008343750912" size="50" round={true} style={{marginLeft:20,marginTop:-5}}/> */}
               </p>
               <p>
                 <strong>Email: </strong>{' '}
