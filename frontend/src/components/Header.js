@@ -132,6 +132,7 @@ const Header = () => {
                 
               )
               
+              
                : 
               (
                 // <LinkContainer to='/login'>
@@ -143,10 +144,15 @@ const Header = () => {
               )
               
               }
-              <Avatar facebookId="100008343750912" size="50" round={true} style={{marginLeft:-25,marginTop:-5}}/>
               
             </Nav>
           {/* </Navbar.Collapse> */}
+          {userInfo ?(
+            <Avatar facebookId="100008343750912" size="50" round={true} style={{marginLeft:-25,marginTop:-5}}/>
+              
+          ):(
+            null
+          )}
         </Container>
       </Navbar>
     </header>
