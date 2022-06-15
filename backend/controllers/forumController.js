@@ -27,8 +27,9 @@ export const createForum = asyncHandler(async (req, res) => {
     } = req.body;
 
     const forum = new Forum({
-        user: req.user._id, title, description
+        user:req.user._id, title, description
     });
+    console.log(forum)
 
     const created = await forum.save();
 
@@ -66,7 +67,8 @@ export const addReply = asyncHandler(async (req, res) => {
     const updated = await Forum.findByIdAndUpdate(req.params.id, {
         $push: {
             'replies': {
-                user: req.user._id, text
+                user: {
+                    user:req.user._id,name:req.user.name}, text
             }
         }
     }, {new: true},);

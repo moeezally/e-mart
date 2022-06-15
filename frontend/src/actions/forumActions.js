@@ -16,7 +16,7 @@ export const createForum = ({title, description}) => async (dispatch, getState) 
         },
     }
 
-    const {data} = await axios.post('/api/forum', {
+    const {data} = await axios.post('/api/forum/', {
         title, description
     }, config);
 
@@ -27,6 +27,9 @@ export const createForum = ({title, description}) => async (dispatch, getState) 
 
 export const getForum = (id) => async (dispatch, getState) => {
 
+    console.log('====================================');
+    console.log(id);
+    console.log('====================================');
     const {
         userLogin: {userInfo},
     } = getState()

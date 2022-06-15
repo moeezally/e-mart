@@ -39,6 +39,7 @@ export default function ForumDetailPage({match}) {
 
     function handleSubmit(e) {
         dispatch(addReply(match.params.id, replyText));
+        setReplyText("")
         e.preventDefault();
     }
 
@@ -87,7 +88,9 @@ export default function ForumDetailPage({match}) {
 
             <h2 className='mt-5'>Replies</h2>
 
-            {forum.replies.map((reply) => (<Card className="rounded mb-4">
+            {forum.replies.map((reply) => 
+            {console.log(reply);
+             return (<Card className="rounded mb-4">
                 <Card.Header>
                 <Avatar facebookId="100008343750912" size="50" round={true} style={{marginRight:15,marginTop:-5}}/>
                     {reply.user.name}
@@ -104,7 +107,10 @@ export default function ForumDetailPage({match}) {
                         <p className='ml-2 pb-0 mb-0'>{reply.total_likes} likes</p>
                     </div>
                 </Card.Footer>
-            </Card>))}
+            </Card>)
+})
+            }
+            
         </div>}
     </>;
 }
