@@ -28,6 +28,8 @@ export default function GardenDetails({match}) {
 
     const [garden, setGarden] = useState(undefined);
 
+  const [rotate, setRotate] = useState(0);  
+
     useEffect(() => {
         dispatch(listProductsByCategory('Plants'))
     }, [dispatch])
@@ -103,6 +105,16 @@ export default function GardenDetails({match}) {
         dispatch(updateGarden({...garden, grid: objs}));
     }
 
+    function handleRotate(p) {
+        let r = rotate;
+        if (p == 1) {
+          r += 90;
+        }
+        if (p == 0) {
+          r -= 90;
+        }
+        setRotate(r);
+      }
     return (<div>
         {garden && <div>
             <Form onSubmit={submitHandler}>
@@ -168,8 +180,16 @@ export default function GardenDetails({match}) {
                         <div className='col-12 p-4 col-lg-8 d-flex align-items-center justify-content-center mw-100'>
                             {/* <text style={{textAlign:'center'}}>Left Side</text> */}
                             <div className='w-100'>
+                            <button onClick={(e) => handleRotate(0)}>
+                      Rotate Left
+                    </button>
+                    <button onClick={(e) => handleRotate(1)}>
+                      Rotate Right
+                    </button>
                                 <img className={'border rounded-sm mw-100 w-100'} src={garden.image}
-                                     alt={'Garden Image'}/>
+                                     alt={'Garden Image'}
+                                     style={{ transform: `rotate(${rotate}deg)` }}
+                                     />
                                      {/* <text style={{marginRight:-50,padding:250}}>Rear Side</text> */}
                             </div>
                             {/* <text style={{textAlign:'center'}}>Right Side</text> */}
