@@ -35,6 +35,12 @@ const forumSchema = mongoose.Schema({
     }, description: {
         type: String
     },
+    approved:{
+        type:Boolean,
+        required:true
+
+
+    },
      replies: [replySchema],
 }, {
     timestamps: true,

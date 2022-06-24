@@ -103,8 +103,10 @@ const OrderListScreen = ({history}) => {
                                     order.deliveredAt.substring(0, 10)
 
                                 ) : (
-                                    <div style={{cursor: 'pointer'}} onClick={() => handleDeliverShow(order)}>
+                                    <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
                                         <i className='fas fa-times' style={{color: 'red'}}/>
+                                        <div onClick={() => handleDeliverShow(order)} style={{cursor: 'pointer',marginRight:-25}}> <i className='fas fa-edit'></i> </div>
+                                        
                                     </div>
                                 )}
                             </td>

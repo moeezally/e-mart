@@ -6,13 +6,18 @@ export const getForums = asyncHandler(async (req, res) => {
     const page = Number(req.query.pageNumber) || 1
 
     const count = await Forum.countDocuments()
-    const forums = await Forum.find({})
+    let forums = await Forum.find({})
+        
         .sort('-createdAt')
         .limit(pageSize)
         .skip(pageSize * (page - 1))
         .populate('user', '_id name');
 
+    forums=forums.filter((forum)=>forum.approved)
+
     const data = forums.map((forum) => {
+        console.log(forum);
+
         return {
             ...forum._doc, 'replies': [], 'replies_count': forum['replies'].length
         }
@@ -21,13 +26,28 @@ export const getForums = asyncHandler(async (req, res) => {
     res.json({forums: data, page, pages: Math.ceil(count / pageSize)})
 })
 
+export const getAllForums = asyncHandler(async (req, res) => {
+    
+
+    const forums = await Forum.find({})
+        .populate('user', '_id name');
+
+
+    const data = forums.map((forum) => {
+        return {
+            ...forum._doc,
+        }
+    })
+    res.json({forums: data})
+})
+
 export const createForum = asyncHandler(async (req, res) => {
     const {
         title, description,
     } = req.body;
 
     const forum = new Forum({
-        user:req.user._id, title, description
+        user:req.user._id, title, description,approved:false
     });
     console.log(forum)
 

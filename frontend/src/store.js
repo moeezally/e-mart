@@ -57,10 +57,13 @@ import {
 import {
     addReplyReducer,
     createForumReducer,
+    forumApproveReducer,
     getAllForumsReducer,
     getForumReducer,
+    getTotalForumsReducer,
     toggleLikeReducer
 } from "./reducers/forumReducer";
+import { getTotalForums } from './actions/forumActions'
 
 const reducer = combineReducers({
     productList: productListReducer,
@@ -114,6 +117,8 @@ const reducer = combineReducers({
     forumCreate: createForumReducer,
     forumAddReply: addReplyReducer,
     forumLike: toggleLikeReducer,
+    forumTotal:getTotalForumsReducer,
+    forumApprove:forumApproveReducer
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []

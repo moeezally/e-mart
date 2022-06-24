@@ -4,6 +4,7 @@ import { Card,Navbar } from 'react-bootstrap'
 import Rating from './Rating'
 import SearchBox from './SearchBox'
 import LinesEllipsis from 'react-lines-ellipsis'
+ 
 
 const Product = ({ product }) => {
   return (

@@ -31,7 +31,7 @@ const getProducts = asyncHandler(async (req, res) => {
         .populate('user', '_id name');
         const data =products.map((product) => {
             return {
-                ...product._doc, 'replies': [], 'replies_count': product['replies'].length
+                ...product._doc,
             }
         })
 
@@ -51,20 +51,20 @@ const getProductById = asyncHandler(async (req, res) => {
       
         let product = await Product.findById(req.params.id)
             .populate('user', '_id name')
-            .populate('replies.user', '_id name');
+            // .populate('replies.user', '_id name');
       
         let data = {...product._doc}
       
-        data.replies = data.replies.map((r) => {
-            let reply = {...r._doc};
-            if (user) {
-                let is_liked = reply.likes.filter((like) => like.user == user);
-                reply['liked_by_me'] = is_liked.length > 0;
-            }
-            reply['total_likes'] = reply.likes.length;
-            delete reply['likes'];
-            return reply;
-        })
+        // data.replies = data.replies.map((r) => {
+        //     let reply = {...r._doc};
+        //     if (user) {
+        //         let is_liked = reply.likes.filter((like) => like.user == user);
+        //         reply['liked_by_me'] = is_liked.length > 0;
+        //     }
+        //     reply['total_likes'] = reply.likes.length;
+        //     delete reply['likes'];
+        //     return reply;
+        // })
       
         res.json(product)
     } else {
@@ -97,6 +97,9 @@ const createProduct = asyncHandler(async (req, res) => {
         price: 0,
         user: req.user._id,
         image: '/images/sample.jpg',
+        image2: '/images/sample.jpg',
+        image3: '/images/sample.jpg',
+        image4: '/images/sample.jpg',
         brand: 'Garden Mart',
         category: 'Plants/Seeds/Fertilizers/Tools',
         countInStock: 0,
@@ -119,6 +122,9 @@ const updateProduct = asyncHandler(async (req, res) => {
         description,
         care,
         image,
+        image2,
+        image3,
+        image4,
         brand,
         category,
         countInStock,
@@ -132,6 +138,9 @@ const updateProduct = asyncHandler(async (req, res) => {
         product.description = description
         product.care = care
         product.image = image
+        product.image2 = image2
+        product.image3 = image3
+        product.image4 = image4
         product.brand = brand
         product.category = category
         product.countInStock = countInStock

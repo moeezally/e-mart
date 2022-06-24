@@ -35,9 +35,12 @@ import Garden from './screens/VirtualGarden/Garden'
 import GardenDetails from "./screens/VirtualGarden/GardenDetails";
 import MyOrders from './screens/MyOrders'
 import ForumDetailPage from "./screens/ForumDetailPage";
+import ForumListScreen from './screens/ForumListScreen'
 
 const App = () => {
-    return (<Router>
+    return (
+    
+    <Router>
         <Header/>
         <main className='py-3'>
             <Container>
@@ -84,6 +87,7 @@ const App = () => {
                 />
                 <Route path='/admin/product/:id/edit' component={ProductEditScreen}/>
                 <Route path='/admin/orderlist' component={OrderListScreen}/>
+                <Route path='/admin/forumlist' component={ForumListScreen}/>
                 <Route path='/search/:keyword' component={HomeScreen} exact/>
                 <Route path='/page/:pageNumber' component={HomeScreen} exact/>
                 <Route

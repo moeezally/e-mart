@@ -33,7 +33,7 @@ export default function Forum({match}) {
 
     function handleSubmit(e) {
         // post new question
-        dispatch(createForum({title: askTitle, description: askQuestion}));
+        dispatch(createForum({title: askTitle, description: askQuestion,approved:true}));
         handleModalClose();
         e.preventDefault();
     }

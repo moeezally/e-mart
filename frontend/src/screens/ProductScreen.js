@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {Row, Col, Image, ListGroup, Card, Button, Form} from 'react-bootstrap'
+import {Row, Col, Image, ListGroup, Card, Button,Modal, Form} from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -13,7 +13,7 @@ import {TransformWrapper, TransformComponent} from 'react-zoom-pan-pinch'
 import Avatar from 'react-avatar';
 
 import {
-    listProductDetails, createProductReview,
+    listProductDetails, createProductReview, createProduct,
 } from '../actions/productActions'
 
 import {
@@ -28,6 +28,13 @@ const ProductScreen = ({history, match}) => {
     const [qty, setQty] = useState(1)
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
+    
+    const [showCreateModal, setShowCreateModal] = useState(false);
+    const handleModalClose = () => setShowCreateModal(false);
+    const handleModalShow = () => setShowCreateModal(true);
+
+    const [askTitle, setAskTitle] = useState('');
+    const [askQuestion, setAskQuestion] = useState('');
 
     const dispatch = useDispatch()
 
@@ -85,6 +92,12 @@ const ProductScreen = ({history, match}) => {
             rating, comment,
         }))
     }
+    function handleSubmit(e) {
+        // post new question
+        dispatch(askQuestion({title: askTitle, description: askQuestion}));
+        handleModalClose();
+        e.preventDefault();
+    }
 //   
 
     return (<>
@@ -102,9 +115,9 @@ const ProductScreen = ({history, match}) => {
 
                         <Image src={product.image} alt={product.name} fluid/>
 
-                        <Image src={product.image} alt={product.name} fluid/>
-                        <Image src={product.image} alt={product.name} fluid/>
-                        <Image src={product.image} alt={product.name} fluid/>
+                        <Image src={product.image2} alt={product.name} fluid/>
+                        <Image src={product.image3} alt={product.name} fluid/>
+                        <Image src={product.image4} alt={product.name} fluid/>
 
 
                     </Carousel>
@@ -184,6 +197,51 @@ const ProductScreen = ({history, match}) => {
                     </Card>
                 </Col>
             </Row>
+            <button className="btn btn-success mt-4" onClick={handleModalShow}>Ask a Question?</button>
+
+
+            <Modal show={showCreateModal} onHide={handleModalClose} centered>
+            <Form onSubmit={handleSubmit}>
+                <Modal.Header closeButton>
+
+                    <Modal.Title>Ask New Question</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+
+                    <Form.Group style={{margin: 10}}>
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control
+                            type='text'
+                            placeholder='Short question title'
+                            value={askTitle}
+                            onChange={(e) => setAskTitle(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+
+                    <Form.Group style={{margin: 10}}>
+                        <Form.Label>Question</Form.Label>
+                        <Form.Control
+                            type='text'
+                            as='textarea'
+                            placeholder='Long description explaining your question in detail'
+                            value={askQuestion}
+                            onChange={(e) => setAskQuestion(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleModalClose}>
+                        Close
+                    </Button>
+                    <Button type='submit' variant="primary" style={{backgroundColor: '#1D4B2C'}}>
+                        Create
+                    </Button>
+                </Modal.Footer>
+            </Form>
+        </Modal>
             <Row>
                 <Col md={6}>
 

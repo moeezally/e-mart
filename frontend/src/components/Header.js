@@ -59,7 +59,7 @@ const Header = () => {
             
             <Nav className='ml-auto'>
               
-              {userInfo ? (
+              {userInfo && !userInfo.isAdmin ?(
                 <NavDropdown title='Services' id='services'>
                   <LinkContainer to='/blogs'>
                     <NavDropdown.Item>Blogs</NavDropdown.Item>
@@ -78,19 +78,29 @@ const Header = () => {
                   </LinkContainer>
                 </NavDropdown>
               ): (
-                <LinkContainer to='/login'>
-                  <Nav.Link>
-                    <i className='fas fa-user'></i> Sign In
-                  </Nav.Link>
-                </LinkContainer>
+                // <LinkContainer to='/login'>
+                //   <Nav.Link>
+                //     <i className='fas fa-user'></i> Sign In
+                //   </Nav.Link>
+                // </LinkContainer>
+                null
               )
               
               }
+              {userInfo  ?(
+                null
+              ):(
+                <LinkContainer to='/login'>
+                  <Nav.Link>
+                     <i className='fas fa-user'></i> Sign In
+                   </Nav.Link>
+                 </LinkContainer>
+              )}
             
               
 
 
-
+{/* 
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin Panel' id='adminmenu'>
                   <LinkContainer to='/admin/userlist'>
@@ -109,7 +119,7 @@ const Header = () => {
                     <NavDropdown.Item>Orders</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
-              )}
+              )} */}
                 <LinkContainer to='/cart'>
                 <Nav.Link>
                   <i className='fas fa-shopping-cart'>&nbsp;</i> Cart
@@ -117,7 +127,7 @@ const Header = () => {
               </LinkContainer>
               
 
-{userInfo ? (
+{userInfo  ? (
                 <NavDropdown title={userInfo.name} id='username'>
                   <LinkContainer to='/profile'>
                     <NavDropdown.Item>Profile</NavDropdown.Item>

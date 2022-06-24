@@ -33,6 +33,18 @@ const replySchema = mongoose.Schema({
 
 
 
+const questionSchema = mongoose.Schema({
+  user: {
+      type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'
+  }, question: {
+      type: String, required: true
+  },replies:[replySchema]
+}, {
+  timestamps: true,
+})
+
+
+
 const productSchema = mongoose.Schema(
   {
     user: {
@@ -45,6 +57,18 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     image: {
+      type: String,
+      required: true,
+    },
+    image2: {
+      type: String,
+      required: true,
+    },
+    image3: {
+      type: String,
+      required: true,
+    },
+    image4: {
       type: String,
       required: true,
     },
@@ -86,7 +110,8 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    replies: [replySchema],
+    question:[questionSchema]
+    // replies: [replySchema],
   },
   {
     timestamps: true,
