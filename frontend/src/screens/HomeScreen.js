@@ -36,7 +36,7 @@ const HomeScreen = ({ match,history }) => {
     <>
       <Meta />
       
-      {!keyword && !userInfo.isAdmin ? (
+      {!keyword && userInfo && !userInfo.isAdmin ||!userInfo ? (
       
         <ProductCarousel />
       ) : (
@@ -45,7 +45,7 @@ const HomeScreen = ({ match,history }) => {
         // </Link>
         null
       )}
-     {userInfo && !userInfo.isAdmin ?(
+     {userInfo  && !userInfo.isAdmin || !userInfo ?(
       
       
       <Col md={12}  style={{marginLeft:-70,padding:20}} >
@@ -55,14 +55,14 @@ const HomeScreen = ({ match,history }) => {
 null
       )}
       
-      {loading && !userInfo.isAdmin ? (
+      {loading  && userInfo && !userInfo.isAdmin ? (
         <Loader />
-      ) : error && !userInfo.isAdmin ? (
+      ) : error  && userInfo && !userInfo.isAdmin ? (
         <Message variant='danger'>{error}</Message>
       ):(
         null
       )}
-       {userInfo && !userInfo.isAdmin ?(
+       {userInfo && !userInfo.isAdmin || !userInfo ?(
         <>
          <Row>
           <h1 style={{textAlign:'center' ,marginLeft:10}}>Latest Products</h1></Row>
