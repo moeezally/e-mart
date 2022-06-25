@@ -45,6 +45,7 @@ const HomeScreen = ({ match,history }) => {
         // </Link>
         null
       )}
+     {/* {userInfo  && !userInfo.isAdmin || !userInfo ?( */}
      {userInfo  && !userInfo.isAdmin || !userInfo ?(
       
       
@@ -127,7 +128,7 @@ null
           <Card style={{height:250,marginTop:50}}>
           <Link to={'/admin/userlist'}>
             <Card.Body>
-        <Card.Img src='https://www.iconpacks.net/icons/1/free-user-group-icon-296-thumb.png' variant='top'style={{width:225,height:200}}/>
+        <Card.Img src='https://www.iconpacks.net/icons/1/free-user-group-icon-296-thumb.png' variant='top'style={{width:305,height:200}}/>
         <Card.Text style={{textAlign:'center'}}>Users</Card.Text>
         </Card.Body>
         {/* <Card.Img src={product.image} variant='top' /> */}
@@ -138,7 +139,7 @@ null
           <Card style={{height:250,marginTop:50}}>
           <Link to={'/admin/productlist'}>
             <Card.Body>
-        <Card.Img src='https://specials-images.forbesimg.com/imageserve/621b817d4a86784da5949c9c/three-potted-plants-set-up-on-a-small-table/960x0.jpg?cropX1=0&cropX2=2132&cropY1=652&cropY2=2251' variant='top'style={{width:225,height:200}}/>
+        <Card.Img src='https://specials-images.forbesimg.com/imageserve/621b817d4a86784da5949c9c/three-potted-plants-set-up-on-a-small-table/960x0.jpg?cropX1=0&cropX2=2132&cropY1=652&cropY2=2251' variant='top'style={{width:305,height:200}}/>
         {/* <Card.Img src={product.image} variant='top' /> */}
         <Card.Text style={{textAlign:'center'}}>Products</Card.Text>
         </Card.Body>
@@ -148,7 +149,7 @@ null
                       <Card style={{height:250,marginTop:50}}>
           <Link to={'/admin/bloglist'}>
             <Card.Body>
-        <Card.Img src='https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d3JpdGluZ3xlbnwwfHwwfHw%3D&w=1000&q=80' variant='top'style={{width:225,height:200}}/>
+        <Card.Img src='https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d3JpdGluZ3xlbnwwfHwwfHw%3D&w=1000&q=80' variant='top'style={{width:305,height:200}}/>
         {/* <Card.Img src={product.image} variant='top' /> */}
         <Card.Text style={{textAlign:'center'}}>Blogs</Card.Text>
         </Card.Body>
@@ -161,7 +162,7 @@ null
           <Card style={{height:250, marginTop:50}}>
           <Link to={'/admin/rentinglist'}>
             <Card.Body>
-        <Card.Img src='https://collegian.csufresno.edu/wp-content/uploads/2019/06/HomeRentalImage-825x500.jpg' variant='top'style={{width:225,height:200}}/>
+        <Card.Img src='https://collegian.csufresno.edu/wp-content/uploads/2019/06/HomeRentalImage-825x500.jpg' variant='top'style={{width:305,height:200}}/>
         {/* <Card.Img src={product.image} variant='top' /> */}
         <Card.Text style={{textAlign:'center'}}>Rentings</Card.Text>
         </Card.Body>
@@ -173,7 +174,7 @@ null
           <Card style={{height:250,marginTop:50}}>
           <Link to={'/admin/orderlist'}>
             <Card.Body>
-        <Card.Img src='https://cdn5.vectorstock.com/i/1000x1000/21/19/orders-list-vector-16672119.jpg' variant='top'style={{width:225,height:200}}/>
+        <Card.Img src='https://cdn5.vectorstock.com/i/1000x1000/21/19/orders-list-vector-16672119.jpg' variant='top'style={{width:305,height:200}}/>
         {/* <Card.Img src={product.image} variant='top' /> */}
         <Card.Text style={{textAlign:'center'}}>Orders</Card.Text>
         </Card.Body>
@@ -185,7 +186,7 @@ null
           <Card style={{height:250,marginTop:50}}>
           <Link to={'/admin/forumlist'}>
             <Card.Body>
-        <Card.Img src='https://cdn.spark.app/media/whitefuse/image/blog_forums_cropped.png' variant='top'style={{width:225,height:200}}/>
+        <Card.Img src='https://cdn.spark.app/media/whitefuse/image/blog_forums_cropped.png' variant='top'style={{width:305,height:200}}/>
         {/* <Card.Img src={product.image} variant='top' /> */}
         <Card.Text style={{textAlign:'center'}}>Forums</Card.Text>
         </Card.Body>
