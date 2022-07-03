@@ -48,7 +48,7 @@ const ForumListScreen = ({ history, match }) => {
   ])
 const handleforum=(e)=>{
 //  dispatch(approveforum(forumstatus))
- handleapprove()
+//  handleapprove()
   e.preventDefault();
 }
  
@@ -56,7 +56,7 @@ const handleforum=(e)=>{
     <>
       <Row className='align-items-center'>
         <Col>
-          <h1 style={{textAlign:'right', marginLeft:50}}>Forums</h1>
+          <h1 style={{textAlign:'center', marginLeft:50}}>Forums</h1>
         </Col>
         
       </Row>
