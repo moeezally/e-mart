@@ -48,7 +48,7 @@ const ForumListScreen = ({ history, match }) => {
   ])
 const handleforum=(e)=>{
 //  dispatch(approveforum(forumstatus))
-//  handleapprove()
+ handleapprove()
   e.preventDefault();
 }
  
