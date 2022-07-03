@@ -6,12 +6,14 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import {listOrders, deliverOrder} from '../actions/orderActions'
 import {Link} from 'react-router-dom'
+import Paginate from '../components/Paginate'
 
-const OrderListScreen = ({history}) => {
+const OrderListScreen = ({history,match}) => {
+    const pageNumber = match.params.pageNumber || 1
     const dispatch = useDispatch()
 
     const orderList = useSelector((state) => state.orderList)
-    const {loading, error, orders} = orderList;
+    const {loading, error, orders, page, pages } = orderList;
 
     const orderDeliverReducer = useSelector((state) => state.orderDeliver);
     const {loading: deliver_loading, success: deliver_success} = orderDeliverReducer;
@@ -29,16 +31,18 @@ const OrderListScreen = ({history}) => {
         } else {
             history.push('/login')
         }
-    }, [dispatch, history, userInfo, deliver_success])
+    }, [dispatch, history, userInfo, deliver_success,pageNumber])
 
     function handleDeliverUpdate(e) {
         dispatch(deliverOrder(deliverOrderObj));
         handleDeliverClose();
         e.preventDefault();
     }
+    
 
     return (
         <>
+        
             <Modal show={deliverOrderObj !== undefined} onHide={handleDeliverClose} centered>
                 <Form onSubmit={handleDeliverUpdate}>
                     <Modal.Header closeButton>
@@ -70,6 +74,7 @@ const OrderListScreen = ({history}) => {
             ) : error ? (
                 <Message variant='danger'>{error}</Message>
             ) : (
+                <>
                 <Table variant='outline-success' className='table-sm table-bordered'>
                     <thead style={{backgroundColor: '#1D4B2C'}}>
                     <tr style={{color: '#FFFFFF'}}>
@@ -84,6 +89,7 @@ const OrderListScreen = ({history}) => {
                     </thead>
                     <tbody>
                     {orders.map((order) => (
+                        
                         <tr key={order._id}>
                             <td>{order._id}</td>
                             <td>{order.user && order.user.name}</td>
@@ -92,15 +98,22 @@ const OrderListScreen = ({history}) => {
                             <td>
                                 {order.isPaid ? (
                                     // order.paidAt.substring(0, 10)
-                                    null
+                                    // null
+                                    <p>Paid {order.paidAt}</p>
                                 ) : (
 
                                     <i className='fas fa-times' style={{color: 'red'}}/>
+                                    
+                                    
                                 )}
                             </td>
                             <td>
+                                
                                 {order.isDelivered ? (
-                                    order.deliveredAt.substring(0, 10)
+                                   
+                                    
+                                    <p>Delivered on: {order.deliveredAt}</p>    
+                                    // null
 
                                 ) : (
                                     <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
@@ -121,7 +134,13 @@ const OrderListScreen = ({history}) => {
                     ))}
                     </tbody>
                 </Table>
+                 
+                 <Paginate pages={pages} page={page} isAdmin={true} />
+                                    
+                 </>
             )}
+
+            
         </>
     )
 }

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -72,6 +73,9 @@ const BlogListScreen = ({ history, match }) => {
 
   return (
     <>
+    <Link className='btn btn  my-3' to='/' style={{backgroundColor: '#1D4B2C', color: '#FFFFFF'}}>
+            Go Back
+        </Link>
       <Row className='align-items-center'>
         <Col>
           <h1 style={{textAlign:'right', marginLeft:50}}>Blogs</h1>

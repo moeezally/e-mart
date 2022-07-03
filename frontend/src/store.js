@@ -61,7 +61,8 @@ import {
     getAllForumsReducer,
     getForumReducer,
     getTotalForumsReducer,
-    toggleLikeReducer
+    toggleLikeReducer,
+    forumDeleteReducer
 } from "./reducers/forumReducer";
 import { getTotalForums } from './actions/forumActions'
 
@@ -118,7 +119,8 @@ const reducer = combineReducers({
     forumAddReply: addReplyReducer,
     forumLike: toggleLikeReducer,
     forumTotal:getTotalForumsReducer,
-    forumApprove:forumApproveReducer
+    forumApprove:forumApproveReducer,
+    forumDelete:forumDeleteReducer
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []

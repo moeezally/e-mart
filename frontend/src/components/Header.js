@@ -78,12 +78,28 @@ const Header = () => {
                   </LinkContainer>
                 </NavDropdown>
               ): (
-                // <LinkContainer to='/login'>
-                //   <Nav.Link>
-                //     <i className='fas fa-user'></i> Sign In
-                //   </Nav.Link>
-                // </LinkContainer>
-                null
+                <NavDropdown title='Panel' id='Panel'>
+                  <LinkContainer to='/admin/userlist'>
+                    <NavDropdown.Item>Users List</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/admin/productlist'>
+                    <NavDropdown.Item>Products List</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/admin/bloglist'>
+                    <NavDropdown.Item>Blogs List</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/admin/rentinglist'>
+                    <NavDropdown.Item>Rentings List</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/admin/orderlist'>
+                    <NavDropdown.Item>Orders List</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/admin/forumlist'>
+                    <NavDropdown.Item>Forums List</NavDropdown.Item>
+                  </LinkContainer>
+                  
+                </NavDropdown>
+                
               )
               
               }

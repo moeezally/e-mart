@@ -8,7 +8,8 @@ import {
     FORUM_GET_ONE,
     FORUM_GET_TOTAL,
     FORUM_GET_TOTAL_SUCCESS,
-    FORUM_TOGGLE_LIKE
+    FORUM_TOGGLE_LIKE,
+    FORUM_DELETE_REQUEST,FORUM_DELETE_SUCCESS,FORUM_DELETE_FAIL
 } from "../constants/forumConstants";
 
 export const createForumReducer = (state = {}, action) => {
@@ -77,7 +78,7 @@ export const forumApproveReducer = (state = {}, action) => {
         }
       case FORUM_APPROVE_SUCCESS:
         return {
-          loading: false,
+          loading: true,
           success: true,
         }
       case FORUM_APPROVE_FAIL:
@@ -90,4 +91,18 @@ export const forumApproveReducer = (state = {}, action) => {
         return state
     }
   }
+
+  export const forumDeleteReducer = (state = {}, action) => {
+    switch (action.type) {
+        case FORUM_DELETE_REQUEST:
+            return {loading: true}
+        case FORUM_DELETE_SUCCESS:
+            return {loading: false, success: true}
+        case FORUM_DELETE_FAIL:
+            return {loading: false, error: action.payload}
+        default:
+            return state
+    }
+}
+
   

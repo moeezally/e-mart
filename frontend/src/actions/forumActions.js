@@ -1,7 +1,9 @@
 import axios from 'axios'
 import {
-    FORUM_ADD_REPLY, FORUM_CREATE, FORUM_GET_ALL, FORUM_GET_ONE, FORUM_TOGGLE_LIKE, FORUM_GET_TOTAL,FORUM_GET_TOTAL_SUCCESS, FORUM_APPROVE_REQUEST, FORUM_APPROVE_SUCCESS, FORUM_APPROVE_FAIL
+    FORUM_ADD_REPLY, FORUM_CREATE, FORUM_GET_ALL, FORUM_GET_ONE, FORUM_TOGGLE_LIKE, FORUM_GET_TOTAL,FORUM_GET_TOTAL_SUCCESS, FORUM_APPROVE_REQUEST, FORUM_APPROVE_SUCCESS, FORUM_APPROVE_FAIL,
+    FORUM_DELETE_REQUEST,FORUM_DELETE_SUCCESS,FORUM_DELETE_FAIL
 } from "../constants/forumConstants";
+import {logout} from './userActions'
 
 
 export const createForum = ({title, description}) => async (dispatch, getState) => {
@@ -96,7 +98,7 @@ export const toggleLike = (id, rid) => async (dispatch, getState) => {
 
 
 
-export const approveforum = (forum) => async (dispatch, getState) => {
+export const approveforum = (id) => async (dispatch, getState) => {
     try {
         dispatch({
             type: FORUM_APPROVE_REQUEST,
@@ -112,7 +114,7 @@ export const approveforum = (forum) => async (dispatch, getState) => {
             },
         }
 
-        const {data} = await axios.put(`/api/forum/${forum._id}/approved`, {}, config)
+        const {data} = await axios.put(`/api/forum/${id}/approved`, {}, config)
 
         dispatch({
             type: FORUM_APPROVE_SUCCESS, payload: data,
@@ -127,3 +129,41 @@ export const approveforum = (forum) => async (dispatch, getState) => {
         })
     }
 }
+
+
+export const deleteForum = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: FORUM_DELETE_REQUEST,
+        })
+
+        const {
+            userLogin: {userInfo},
+        } = getState()
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        }
+        
+        await axios.delete(`/api/forum/${id}`, config)
+
+        dispatch({
+            type: FORUM_DELETE_SUCCESS,
+        })
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        if (message === 'Not authorized, token failed') {
+            dispatch(logout())
+        }
+        dispatch({
+            type: FORUM_DELETE_FAIL,
+            payload: message,
+        })
+    }
+}
+

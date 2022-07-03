@@ -1,8 +1,8 @@
 
 import React, { useEffect ,useState  } from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 import { Table, Button, Row, Col } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import { connectAdvanced, useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
@@ -13,7 +13,7 @@ import {
 } from '../actions/blogActions'
 import { BLOG_CREATE_RESET} from '../constants/blogConstants'
 import { FORUM_GET_TOTAL } from '../constants/forumConstants'
-import { getTotalForums,approveforum } from '../actions/forumActions'
+import { getTotalForums,approveforum, deleteForum } from '../actions/forumActions'
 
 const ForumListScreen = ({ history, match }) => {
 
@@ -26,11 +26,14 @@ const ForumListScreen = ({ history, match }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const forumApproveReducer = useSelector((state) => state.forumApprove);
-    const {loading: approve_loading, success: approve_success} = forumApproveReducer;
-    const [forumstatus, setForumStatus] = useState(undefined);
 
-    const handleapprove = (forum) => setForumStatus(forum);
+  const forumDelete = useSelector((state) => state.forumDelete)
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = forumDelete
+
 
   useEffect(() => {
     dispatch(getTotalForums())
@@ -44,19 +47,30 @@ const ForumListScreen = ({ history, match }) => {
     dispatch,
     history,
     userInfo,
+    successDelete,
     
   ])
-const handleforum=(e)=>{
-//  dispatch(approveforum(forumstatus))
+const handleforum=(id)=>{
+  console.log(id);
+ dispatch(approveforum(id))
 //  handleapprove()
-  e.preventDefault();
+  // e.preventDefault();
+}
+
+const deleteHandler = (id) => {
+  if (window.confirm('Are you sure')) {
+    dispatch(deleteForum(id))
+  }
 }
  
   return (
     <>
+    <Link className='btn btn  my-3' to='/' style={{backgroundColor: '#1D4B2C', color: '#FFFFFF'}}>
+            Go Back
+        </Link>
       <Row className='align-items-center'>
         <Col>
-          <h1 style={{textAlign:'center', marginLeft:50}}>Forums</h1>
+          <h1 style={{textAlign:'center'}}>Forums</h1>
         </Col>
         
       </Row>
@@ -80,9 +94,20 @@ const handleforum=(e)=>{
                  
                   <td>{forum.description}</td>
                   <td>
-                  <Button onClick={handleforum}>Approve</Button>
+                  <Button onClick={()=>handleforum(forum._id)}
+                  variant='success'>Approve</Button>
                   
+                  <Button
+                      variant='danger'
+                      
+                      onClick={() => deleteHandler(forum._id)}
+                    >Delete
+                      {/* <i className='fas fa-trash'></i> */}
+                    </Button>
                   </td>
+                  
+                 
+                  
                 </tr>
               ))}
             </tbody>

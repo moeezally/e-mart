@@ -89,6 +89,7 @@ const PlaceOrderScreen = ({ history }) => {
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
+        
       })
     )
   }
@@ -103,6 +104,8 @@ const PlaceOrderScreen = ({ history }) => {
             shippingPrice: cart.shippingPrice,
             taxPrice: cart.taxPrice,
             totalPrice: cart.totalPrice,
+            isPaid:cart.paymentMethod=="CreditCard" ? true:false
+            
           })
         
         );

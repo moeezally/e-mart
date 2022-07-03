@@ -31,14 +31,15 @@ export const getAllForums = asyncHandler(async (req, res) => {
 
     const forums = await Forum.find({})
         .populate('user', '_id name');
+    
+    let forumFiltered=forums.filter((forum)=>forum.approved==false)
 
-
-    const data = forums.map((forum) => {
-        return {
-            ...forum._doc,
-        }
-    })
-    res.json({forums: data})
+    // const data = forumFiltered.map((forum) => {
+    //     return {
+    //         ...forum._doc,
+    //     }
+    // })
+    res.json({forums: forumFiltered})
 })
 
 export const createForum = asyncHandler(async (req, res) => {
@@ -110,3 +111,32 @@ export const addLike = asyncHandler(async (req, res) => {
 
     res.json(updated);
 });
+
+export const approveforum = asyncHandler(async (req, res) => {
+    const forum = await Forum.findById(req.params.id)
+
+    if (forum) {
+        forum.approved = true
+        // forum.deliveredAt = Date.now()
+
+        const updatedForum = await forum.save()
+
+        res.json(updatedForum)
+    } else {
+        res.status(404)
+        throw new Error('Forum not found')
+    }
+})
+
+export const deleteForum = asyncHandler(async (req, res) => {
+    const forum = await Forum.findById(req.params.id)
+
+    if (forum) {
+        await forum.remove()
+        res.json({message: 'Forum removed'})
+    } else {
+        res.status(404)
+        throw new Error('Forum not found')
+    }
+})
+

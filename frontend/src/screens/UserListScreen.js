@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button } from 'react-bootstrap'
+import {Link}from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -33,7 +34,11 @@ const UserListScreen = ({ history }) => {
   }
 
   return (
+
     <>
+    <Link className='btn btn  my-3' to='/' style={{backgroundColor: '#1D4B2C', color: '#FFFFFF'}}>
+            Go Back
+        </Link>
       <h1 style={{textAlign:'center'}}>Users</h1>
       {loading ? (
         <Loader />

@@ -36,11 +36,13 @@ import GardenDetails from "./screens/VirtualGarden/GardenDetails";
 import MyOrders from './screens/MyOrders'
 import ForumDetailPage from "./screens/ForumDetailPage";
 import ForumListScreen from './screens/ForumListScreen'
+import AboutUs from './screens/AboutUs'
 
 const App = () => {
     return (
     
     <Router>
+         
         <Header/>
         <main className='py-3'>
             <Container>
@@ -101,6 +103,7 @@ const App = () => {
 
                 <Route path='/vg/:id' component={GardenDetails} exact/>
                 <Route path='/vg' component={Garden} exact/>
+                <Route path ='/aboutus' component={AboutUs} exact/>
             </Container>
         </main>
         <Footer/>
