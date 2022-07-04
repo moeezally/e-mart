@@ -77,7 +77,7 @@ const Header = () => {
                     <NavDropdown.Item>Virtual Garden</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
-              ): (
+              ): userInfo && userInfo.isAdmin ? (
                 <NavDropdown title='Panel' id='Panel'>
                   <LinkContainer to='/admin/userlist'>
                     <NavDropdown.Item>Users List</NavDropdown.Item>
@@ -100,6 +100,8 @@ const Header = () => {
                   
                 </NavDropdown>
                 
+              ):(
+                null
               )
               
               }
