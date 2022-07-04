@@ -48,6 +48,7 @@ const ForumListScreen = ({ history, match }) => {
     history,
     userInfo,
     successDelete,
+    getTotalForums()
     
   ])
 const handleforum=(id)=>{
