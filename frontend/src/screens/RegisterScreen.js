@@ -78,7 +78,7 @@ const RegisterScreen = ({ location, history }) => {
             type='address'
             placeholder='Enter address'
             value={address}
-            maxLength='50'
+            maxLength='100'
             onChange={(e) => setAddress(e.target.value)}
           ></Form.Control>
         </Form.Group>

@@ -66,6 +66,14 @@ const LoginScreen = ({ location, history }) => {
           Sign In
         </Button>
       </Form>
+      <br/>
+      <Row>
+        <Col style={{marginLeft:250}}>
+        <Link to='forget'>
+        Forgot Password?
+        </Link>
+        </Col>
+      </Row>
 
       <Row className='py-3'>
         <Col style={{marginLeft:200}}>

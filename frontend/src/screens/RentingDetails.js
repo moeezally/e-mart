@@ -130,12 +130,12 @@ const RentingDetails = ({history, match}) => {
             <Meta title={renting.name}/>
             <Row>
                 <Col md={6}>
-                    <Carousel>
+                    {/* <Carousel> */}
                         <Image src={renting.image} alt={renting.name} fluid/>
+                        {/* <Image src={renting.image} alt={renting.name} fluid/>
                         <Image src={renting.image} alt={renting.name} fluid/>
-                        <Image src={renting.image} alt={renting.name} fluid/>
-                        <Image src={renting.image} alt={renting.name} fluid/>
-                    </Carousel>
+                        <Image src={renting.image} alt={renting.name} fluid/> */}
+                    {/* </Carousel> */}
                 </Col>
                 <Col md={3}>
                     <ListGroup variant='flush'>
@@ -287,76 +287,6 @@ const RentingDetails = ({history, match}) => {
                     </ListGroup>
                 </Col>
             </Row>
-{/*             
-        <Modal show={showCreateModal} onHide={handleModalClose} centered>
-            <Form onSubmit={handleSubmit}>
-                <Modal.Header closeButton>
-
-                    <Modal.Title>Ask New Question</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-
-                    <Form.Group style={{margin: 10}}>
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control
-                            type='text'
-                            placeholder='Short question title'
-                            value={askTitle}
-                            onChange={(e) => setAskTitle(e.target.value)}
-                            required
-                        />
-                    </Form.Group>
-
-                    <Form.Group style={{margin: 10}}>
-                        <Form.Label>Question</Form.Label>
-                        <Form.Control
-                            type='text'
-                            as='textarea'
-                            placeholder='Long description explaining your question in detail'
-                            value={askQuestions}
-                            onChange={(e) => setAskQuestions(e.target.value)}
-                            required
-                        />
-                    </Form.Group>
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleModalClose}>
-                        Close
-                    </Button>
-                    <Button type='submit' variant="primary" style={{backgroundColor: '#1D4B2C'}}>
-                        Create
-                    </Button>
-                </Modal.Footer>
-            </Form>
-        </Modal>
-        <div >
-           <h2> Ask a Question</h2>
-            
-            <button className="btn btn-success mt-4" onClick={handleModalShow}>Ask a Question?</button>
-        </div>
-
-        <div>
-            <h2> Recent Questions</h2>
-
-            <div className="list-group rounded-lg mt-4 mb-4">
-
-                {[renting] && [renting].map((renting) => (<div className='pb-4'>
-                    <div onClick={() => {
-                        history.push(`/rentings/${renting._id}`)
-                    }} 
-                    className="list-group-item rounded-lg" style={{cursor: "pointer"}}>
-                        <div>
-                            <h5 className="list-group-item-heading">{renting.title}</h5>
-                            <p className="list-group-item-text">{renting.descriptions}</p>
-                            <span
-                                className="badge rounded-pill shadow-sm bg-success text-light">{renting.replies_count} {renting.replies_count <= 1 ? 'Reply' : 'Replies'}</span>
-                        </div>
-                    </div>
-                </div>))}
-
-            </div>
-            </div> */}
 
             
         </>
