@@ -2,7 +2,7 @@ import express from 'express'
 
 const router = express.Router()
 import {
-    getForums, getForumById, createForum, addReply, addLike, getAllForums,approveforum,deleteForum
+    getForums, getForumById, createForum, addReply, addLike, getTotalForums,approveforum,deleteForum, getAllForums
 } from '../controllers/forumController.js'
 
 import {protect,admin} from '../middleware/authMiddleware.js'
@@ -12,7 +12,9 @@ router.route('/')
     .post(protect, createForum);
 
 router.route('/all')
-    .get(getAllForums)
+    .get(getTotalForums)
+
+router.route('/user/all').get(getAllForums)
 
 router.route('/:id')
     .post(getForumById)

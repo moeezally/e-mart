@@ -31,7 +31,7 @@ const getProducts = asyncHandler(async (req, res) => {
         .populate('user', '_id name');
         const data =products.map((product) => {
             return {
-                ...product._doc,
+                ...product._doc
             }
         })
 
@@ -51,7 +51,7 @@ const getProductById = asyncHandler(async (req, res) => {
       
         let product = await Product.findById(req.params.id)
             .populate('user', '_id name')
-            // .populate('replies.user', '_id name');
+            .populate('replies.user', '_id name');
       
         let data = {...product._doc}
       

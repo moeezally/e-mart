@@ -26,7 +26,7 @@ export const getForums = asyncHandler(async (req, res) => {
     res.json({forums: data, page, pages: Math.ceil(count / pageSize)})
 })
 
-export const getAllForums = asyncHandler(async (req, res) => {
+export const getTotalForums = asyncHandler(async (req, res) => {
     
 
     const forums = await Forum.find({})
@@ -138,5 +138,20 @@ export const deleteForum = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error('Forum not found')
     }
+})
+
+export const getAllForums = asyncHandler(async (req, res) => {
+    const forums = await Forum.find({})
+    .populate('user', '_id name');
+
+    let forumFiltered=forums.filter((forum)=>forum.approved==true)
+    const data = forumFiltered.map((forum) => {
+
+        return {
+            ...forum._doc, 'replies': [...forum.replies], 'replies_count': forum['replies'].length
+        }
+    })
+
+res.json({forums: data})
 })
 
