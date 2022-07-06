@@ -58,7 +58,7 @@ const EditProfile = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password,city,address,postalCode,phone }))
+      dispatch(updateUserProfile({ id: user._id, name:name, email:email, password:password,city:city,address:address,postalCode:postalCode,phone:phone }))
     }
     history.push("/profile");
   }

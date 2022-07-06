@@ -41,7 +41,7 @@ const RegisterScreen = ({ location, history }) => {
       console.log('====================================');
       console.log(city,phone);
       console.log('====================================');
-      dispatch(register(name, email, password,address,postalCode,phone,city,question,answer))
+      dispatch(register(name, email, password,address,city,postalCode,phone,question,answer))
     }
   }
 

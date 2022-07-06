@@ -91,7 +91,7 @@ export const register = (name, email, password,address,city,postalCode,phone,que
 
     const { data } = await axios.post(
       '/api/users',
-      {name, email, password,address,city,postalCode,phone,question,answer },
+      {name:name, email:email, password:password,address:address,city:city,postalCode:postalCode,phone:phone,question:question,answer:answer },
       config
     )
 

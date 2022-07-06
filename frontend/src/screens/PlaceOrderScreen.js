@@ -226,9 +226,10 @@ const PlaceOrderScreen = ({ history }) => {
         currency='PKR'
         stripeKey="pk_test_51L1FqRSEhdTePo5yWy3pZMXcn9AgQ6RQoUFsfi8Q1rH6Kln2e0iPtsWZ6DG7sIcmW5Fy5JUDjTr3m7mbgPoxeBwg00iOSeA4Gx"
       > 
-      <Button style={{textAlign:'center',backgroundColor:'#1D4B2C'}}
+      <Button style={{alignContent:'right',backgroundColor:'#1D4B2C'}}
       
                 type="button"
+                
                 className="btn"
                 disabled={cart.cartItems === 0}
                 // onClick={placeOrderHandler}
@@ -239,6 +240,7 @@ const PlaceOrderScreen = ({ history }) => {
         <Button style={{textAlign:'center',backgroundColor:'#1D4B2C'}}
                 type="button"
                 className="btn"
+                
                 disabled={cart.cartItems === 0}
                 onClick={placeOrderHandler}
                 htmltype='submit'

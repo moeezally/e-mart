@@ -34,7 +34,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password,address,postalCode,phone,city,question,answer } = req.body
+  const { name, email, password,address,city,postalCode,phone,question,answer } = req.body
 
   const userExists = await User.findOne({ email })
 
@@ -113,8 +113,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.city = req.body.city || user.city
     user.postalCode = req.body.postalCode || user.postalCode
     user.phone = req.body.phone || user.phone
-    question= req.body.question||user.question
-    user.answer=req.body.answer ||user.answer
     if (req.body.password) {
       user.password = req.body.password
     }
@@ -129,8 +127,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       city: updatedUser.city,
       postalCode: updatedUser.postalCode,
       phone: updatedUser.phone,
-      question:user.question,
-      answer:updatedUser.answer,
       isAdmin: updatedUser.isAdmin,
       token: generateToken(updatedUser._id),
     })
@@ -225,6 +221,9 @@ const forgetPassword = asyncHandler(async (req, res) => {
      user.password=password;
       const updatedUser=await user.save();
       res.status(201);
+      res.json({
+        user:updatedUser
+      })
 
   }
   else{
