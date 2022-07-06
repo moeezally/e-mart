@@ -197,51 +197,7 @@ const ProductScreen = ({history, match}) => {
                     </Card>
                 </Col>
             </Row>
-            <button className="btn btn-success mt-4" onClick={handleModalShow}>Ask a Question?</button>
-
-
-            <Modal show={showCreateModal} onHide={handleModalClose} centered>
-            <Form onSubmit={handleSubmit}>
-                <Modal.Header closeButton>
-
-                    <Modal.Title>Ask New Question</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-
-                    <Form.Group style={{margin: 10}}>
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control
-                            type='text'
-                            placeholder='Short question title'
-                            value={askTitle}
-                            onChange={(e) => setAskTitle(e.target.value)}
-                            required
-                        />
-                    </Form.Group>
-
-                    <Form.Group style={{margin: 10}}>
-                        <Form.Label>Question</Form.Label>
-                        <Form.Control
-                            type='text'
-                            as='textarea'
-                            placeholder='Long description explaining your question in detail'
-                            value={askQuestion}
-                            onChange={(e) => setAskQuestion(e.target.value)}
-                            required
-                        />
-                    </Form.Group>
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleModalClose}>
-                        Close
-                    </Button>
-                    <Button type='submit' variant="primary" style={{backgroundColor: '#1D4B2C'}}>
-                        Create
-                    </Button>
-                </Modal.Footer>
-            </Form>
-        </Modal>
+           
             <Row>
                 <Col md={6}>
 
