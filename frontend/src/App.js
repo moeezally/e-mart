@@ -38,7 +38,7 @@ import ForumDetailPage from "./screens/ForumDetailPage";
 import ForumListScreen from './screens/ForumListScreen'
 import AboutUs from './screens/AboutUs'
 import ForgetPassword from './screens/ForgetPassword'
-import NewPassword from './screens/NewPassword'
+
 
 const App = () => {
     return (
@@ -106,7 +106,7 @@ const App = () => {
                 <Route path='/vg/:id' component={GardenDetails} exact/>
                 <Route path='/vg' component={Garden} exact/>
                 <Route path='/forget' component={ForgetPassword} exact/>
-                <Route path='/newpassword' component={NewPassword} exact/>
+                {/* <Route path='/newpassword' component={NewPassword} exact/> */}
                 <Route path ='/aboutus' component={AboutUs} exact/>
             </Container>
         </main>

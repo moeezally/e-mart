@@ -16,7 +16,17 @@ const userSchema = mongoose.Schema({
         type: Number, required: true
     }, phone: {
         type: String, required: true
-    }, isAdmin: {
+
+    },
+    question:{
+        type:String,
+        required:true
+    },
+    answer:{
+        type:String,
+        required:true
+    },
+     isAdmin: {
         type: Boolean, required: true, default: false,
     },
 }, {

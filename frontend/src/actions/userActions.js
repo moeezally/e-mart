@@ -24,6 +24,9 @@ import {
   USER_UPDATE_FAIL,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_REQUEST,
+  USER_FORGET_REQUEST,
+  USER_FORGET_SUCCESS,
+  USER_FORGET_FAIL
 } from '../constants/userConstants'
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
 
@@ -74,7 +77,7 @@ export const logout = () => (dispatch) => {
   document.location.href = '/login'
 }
 
-export const register = (name, email, password,address,city,postalCode,phone) => async (dispatch) => {
+export const register = (name, email, password,address,city,postalCode,phone,question,answer) => async (dispatch) => {
   try {
     dispatch({
       type: USER_REGISTER_REQUEST,
@@ -88,7 +91,7 @@ export const register = (name, email, password,address,city,postalCode,phone) =>
 
     const { data } = await axios.post(
       '/api/users',
-      { name, email, password,address,city,postalCode,phone },
+      {name, email, password,address,city,postalCode,phone,question,answer },
       config
     )
 
@@ -303,3 +306,33 @@ export const updateUser = (user) => async (dispatch, getState) => {
     })
   }
 }
+
+export const forgetPassword=(email,answer,password)=> async(dispatch) =>{
+  try {
+    dispatch({
+      type: USER_FORGET_REQUEST,
+    })
+
+    
+
+    const { data } = await axios.post(`/api/users/forgetPassword`, {email:email,answer:answer,password:password})
+
+    dispatch({
+      type: USER_FORGET_SUCCESS,
+      payload: data,
+    })
+  
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    dispatch({
+      type: USER_FORGET_FAIL,
+      payload: message,
+    })
+  }
+}
+
+
+

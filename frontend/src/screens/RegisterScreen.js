@@ -11,9 +11,11 @@ const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
-  const [city, setCity] = useState('')
-  const [postalCode, setPostalCode] = useState(null)
+  const [city, setCity] = useState('Lahore')
+  const [postalCode, setPostalCode] = useState(0)
   const [phone, setPhone] = useState('')
+  const question='What is your childhood nickname?';
+  const [answer,setAnswer]=useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
@@ -36,8 +38,10 @@ const RegisterScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
-      
-      dispatch(register(name, email, password,address,city,postalCode,phone))
+      console.log('====================================');
+      console.log(city,phone);
+      console.log('====================================');
+      dispatch(register(name, email, password,address,postalCode,phone,city,question,answer))
     }
   }
 
@@ -92,7 +96,6 @@ const RegisterScreen = ({ location, history }) => {
             value='Lahore'
             maxLength='20'
             disabled
-            onChange={(e) => setCity(e.target.value.replace(/[^\w\s]/gi,""))}
           ></Form.Control>
         </Form.Group>
 
@@ -102,7 +105,7 @@ const RegisterScreen = ({ location, history }) => {
             type='Number'
             placeholder='Enter postalCode'
             value={postalCode}
-            max='999999'
+            max='99999'
             onChange={(e) => setPostalCode(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -110,7 +113,7 @@ const RegisterScreen = ({ location, history }) => {
         <Form.Group controlId='phone'style={{margin:10}}>
           <Form.Label>Enter Phone Number</Form.Label>
           <Form.Control
-            type='tel'
+            type='text'
             placeholder='Enter Phone'
             value={phone}
             pattern="[0-9]{4}[0-9]{7}"
@@ -137,6 +140,31 @@ const RegisterScreen = ({ location, history }) => {
             value={confirmPassword}
             maxLength='15'
             onChange={(e) => setConfirmPassword(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='question'style={{margin:10}}>
+          <Form.Label>Security Question</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Security Question'
+            // value={confirmPassword}
+            value="What is your childhood nickname?"
+            // maxLength='15'
+            disabled
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='answer'style={{margin:10}}>
+          <Form.Label>Answer</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Answer'
+            value={answer}
+            // value="What is your childhood nickname?"
+            // maxLength='15'
+            // disabled
+            onChange={(e) => setAnswer(e.target.value)}
           ></Form.Control>
         </Form.Group>
 

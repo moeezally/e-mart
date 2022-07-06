@@ -92,22 +92,25 @@ const MyOrders = ({ location, history }) => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
+              {orders.map((order) => 
+               
+               (
                 <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
                   <td>{order.totalPrice}</td>
                   <td>
-                    {order.isPaid ? (
-                      // order.paidAt.substring(0, 10)
-                      null
+                    {order && order.isPaid ? (
+                      
+                      new String(order.paidAt).substring(0,10)
+                      // null
                     ) : (
                       <i className='fas fa-times' style={{ color: 'red' }}></i>
                     )}
                   </td>
                   <td>
-                    {order.isDelivered ? (
-                      order.deliveredAt.substring(0, 10)
+                    {order && order.isDelivered? (
+                      new String(order.deliveredAt).substring(0,10)
                     ) : (
                       <i className='fas fa-times' style={{ color: 'red' }}></i>
                     )}
@@ -120,7 +123,8 @@ const MyOrders = ({ location, history }) => {
                     </LinkContainer>
                   </td>
                 </tr>
-              ))}
+              )
+              )}
             </tbody>
           </Table>
         )}

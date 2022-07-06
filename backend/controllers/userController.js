@@ -20,6 +20,8 @@ const authUser = asyncHandler(async (req, res) => {
       city:user.city,
       postalCode:user.postalCode,
       phone:user.phone,
+      question:user.question,
+      answer:user.answer,
       token: generateToken(user._id),
     })
   } else {
@@ -32,7 +34,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password,address,postalCode,phone,city } = req.body
+  const { name, email, password,address,postalCode,phone,city,question,answer } = req.body
 
   const userExists = await User.findOne({ email })
 
@@ -48,7 +50,9 @@ const registerUser = asyncHandler(async (req, res) => {
     address,
     city,
     postalCode,
-    phone
+    phone,
+    question,
+    answer
   })
 
   if (user) {
@@ -60,6 +64,8 @@ const registerUser = asyncHandler(async (req, res) => {
       city:user.city,
       postalCode:user.postalCode,
       phone:user.phone,
+      question:user.question,
+      answer:user.answer,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
     })
@@ -84,6 +90,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
       city:user.city,
       postalCode:user.postalCode,
       phone:user.phone,
+      question:user.question,
+      answer:user.answer,
       isAdmin: user.isAdmin,
     })
   } else {
@@ -105,6 +113,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.city = req.body.city || user.city
     user.postalCode = req.body.postalCode || user.postalCode
     user.phone = req.body.phone || user.phone
+    question= req.body.question||user.question
+    user.answer=req.body.answer ||user.answer
     if (req.body.password) {
       user.password = req.body.password
     }
@@ -119,6 +129,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       city: updatedUser.city,
       postalCode: updatedUser.postalCode,
       phone: updatedUser.phone,
+      question:user.question,
+      answer:updatedUser.answer,
       isAdmin: updatedUser.isAdmin,
       token: generateToken(updatedUser._id),
     })
@@ -178,6 +190,8 @@ const updateUser = asyncHandler(async (req, res) => {
     user.city = req.body.city || user.city
     user.postalCode = req.body.postalCode || user.postalCode
     user.phone = req.body.phone || user.phone
+    question=req.body.question||user.question 
+    answer=req.body.answer ||user.answer
    
     user.isAdmin = req.body.isAdmin
 
@@ -191,11 +205,31 @@ const updateUser = asyncHandler(async (req, res) => {
       city: updatedUser.city,
       postalCode: updatedUser.postalCode,
       phone: updatedUser.phone,
+      question:user.question,
+      answer:updatedUser.answer,
       isAdmin: updatedUser.isAdmin,
     })
   } else {
     res.status(404)
     throw new Error('User not found')
+  }
+})
+
+
+const forgetPassword = asyncHandler(async (req, res) => {
+  const {email,answer,password}=req.body;
+
+  const user = await User.findOne({email})
+    if (user && user.answer==answer) {
+      
+     user.password=password;
+      const updatedUser=await user.save();
+      res.status(201);
+
+  }
+  else{
+    res.status(404);
+    // throw new Error('User not found/Answer incorrect');
   }
 })
 
@@ -208,4 +242,5 @@ export {
   deleteUser,
   getUserById,
   updateUser,
+  forgetPassword
 }

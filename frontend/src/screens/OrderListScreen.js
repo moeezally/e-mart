@@ -96,10 +96,12 @@ const OrderListScreen = ({history,match}) => {
                             <td>{order.createdAt.substring(0, 10)}</td>
                             <td>Rs.{order.totalPrice}</td>
                             <td>
-                                {order.isPaid ? (
+                                {order && order.isPaid ? (
                                     // order.paidAt.substring(0, 10)
                                     // null
-                                    <p>Paid {order.paidAt}</p>
+                                    <p>Paid </p>
+                                    // (order.paidAt)
+                                    // new String(order.paidAt).substring(0,10)
                                 ) : (
 
                                     <i className='fas fa-times' style={{color: 'red'}}/>
@@ -109,10 +111,11 @@ const OrderListScreen = ({history,match}) => {
                             </td>
                             <td>
                                 
-                                {order.isDelivered ? (
+                                {order && order.isDelivered ? (
                                    
                                     
-                                    <p>Delivered on: {order.deliveredAt}</p>    
+                                    // <p>Delivered on:</p>    
+                                        new String (order.deliveredAt).substring(0,10) 
                                     // null
 
                                 ) : (
