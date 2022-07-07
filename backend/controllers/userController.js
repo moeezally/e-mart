@@ -186,8 +186,7 @@ const updateUser = asyncHandler(async (req, res) => {
     user.city = req.body.city || user.city
     user.postalCode = req.body.postalCode || user.postalCode
     user.phone = req.body.phone || user.phone
-    question=req.body.question||user.question 
-    answer=req.body.answer ||user.answer
+    
    
     user.isAdmin = req.body.isAdmin
 
@@ -201,8 +200,7 @@ const updateUser = asyncHandler(async (req, res) => {
       city: updatedUser.city,
       postalCode: updatedUser.postalCode,
       phone: updatedUser.phone,
-      question:user.question,
-      answer:updatedUser.answer,
+      
       isAdmin: updatedUser.isAdmin,
     })
   } else {
