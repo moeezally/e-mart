@@ -138,7 +138,7 @@ const ShippingEdit = ({ location, history }) => {
                 placeholder='PostalCode'
                 required
                 value={postalCode}
-                max='999999'
+                max='99999'
                 onChange={(e) => setPostalCode(e.target.value)}
               ></Form.Control>
             </Form.Group>

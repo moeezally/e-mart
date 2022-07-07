@@ -130,7 +130,7 @@ const EditProfile = ({ location, history }) => {
                 type='Number'
                 placeholder='PostalCode'
                 value={postalCode}
-                max='999999'
+                max='99999'
                 required
                 onChange={(e) => setPostalCode(e.target.value)}
               ></Form.Control>

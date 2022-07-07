@@ -36,7 +36,7 @@ const AboutUs = () => {
 
     </Row>
     <hr/>
-    <h1 style={{textAlign:"center"}} >Our Team</h1>
+    <h1 style={{textAlign:"center"}} >Our Developer Team</h1>
     
     {/* <Card className='my-3 p-3 rounded'> */}
     <Row>
@@ -54,7 +54,7 @@ const AboutUs = () => {
     <div className="pic3">
             <div className='text3'>
             <p style={{fontSize:18}}>Misbah Mansoor</p>
-                <p style={{fontSize:10}}>JS Learner</p>
+                <p style={{fontSize:10}}>REACT Developer</p>
                 </div>
          
     </div>
@@ -64,7 +64,7 @@ const AboutUs = () => {
     <div className="pic2">
             <div className='text2'>
             <p style={{fontSize:18}}>Mustafa Rathore</p>
-                <p style={{fontSize:10}}>Blog Developer</p>
+                <p style={{fontSize:10}}>React Native Developer</p>
                 </div>
          
     </div>
