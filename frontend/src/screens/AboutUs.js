@@ -53,8 +53,8 @@ const AboutUs = () => {
     <Col md={4}>
     <div className="pic3">
             <div className='text3'>
-            <p style={{fontSize:18}}>Misbah Mansoor</p>
-                <p style={{fontSize:10}}>REACT Developer</p>
+            <p style={{fontSize:18}}>Moeez Ali</p>
+                <p style={{fontSize:10}}>MERN Developer</p>
                 </div>
          
     </div>
